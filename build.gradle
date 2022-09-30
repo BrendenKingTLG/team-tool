@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+group 'com.tlglearning'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def junitVersion = '5.9.1'
+    testImplementation "org.junit.jupiter:junit-jupiter:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+clean {
+    delete += file("$projectDir/docs/api")
+}
+
+javadoc {
+    destinationDir = file("$projectDir/docs/api")
+    //noinspection GroovyAssignabilityCheck
+    options {
+        links 'https://docs.oracle.com/en/java/javase/11/docs/api/'
+    }
+}
+
+assemble {
+    dependsOn javadoc
+}
