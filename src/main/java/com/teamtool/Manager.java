@@ -1,9 +1,6 @@
 package com.teamtool;
 
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -34,9 +31,11 @@ public class Manager extends Employee{
         System.out.println("is this employee a manager");
         String managerStatus = input.nextLine();
         System.out.printf("%s,%s,%s,%s,%s", name, hiredate, team, role, managerStatus);
-        try (FileWriter writer = new FileWriter("output.csv")){
+        try (FileWriter fw =new FileWriter("Employee.csv", true);
+             BufferedWriter writer = new BufferedWriter(fw)){
+            writer.newLine();
             writer.write(String.format("%s,%s,%s,%s,%s", name, hiredate, team, role, managerStatus));
-        } catch (FileNotFoundException e) {
+            } catch (Exception e) {
             e.printStackTrace();
         }
     }
