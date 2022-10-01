@@ -33,9 +33,9 @@ public class Manager extends Employee{
         String role = input.nextLine();
         System.out.println("is this employee a manager");
         String managerStatus = input.nextLine();
-        try {
-            PrintWriter writer = new PrintWriter(new FileWriter("output.csv"));
-            writer.println(String.format("%s,%s,%s,%s,%s", name, hiredate, team, role, managerStatus));
+        System.out.printf("%s,%s,%s,%s,%s", name, hiredate, team, role, managerStatus);
+        try (FileWriter writer = new FileWriter("output.csv")){
+            writer.write(String.format("%s,%s,%s,%s,%s", name, hiredate, team, role, managerStatus));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
