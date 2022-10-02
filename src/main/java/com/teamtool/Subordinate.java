@@ -8,7 +8,6 @@ public class Subordinate extends Employee{
         super(name, hiredate);
     }
 
-    @Override
     void query() {
 
     }

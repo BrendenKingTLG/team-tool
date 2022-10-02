@@ -1,5 +1,6 @@
 package com.teamtool;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 public abstract class Employee {
@@ -14,7 +15,5 @@ public abstract class Employee {
         this.hiredate=hiredate;
     }
 
-
-    abstract void query();
 
 }
