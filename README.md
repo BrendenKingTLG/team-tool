@@ -1,5 +1,6 @@
-# Team Project
+#Team Tool
 
-This is a template used as a starter project/repository for the team project executed in week 6.
+Team Tool allow employees to query and learn and familiarize themselves with the heirarchy setup of personnel whom are within
+their chain of command and also the members assigned to their respective team. This Tool wil also enable managers to assign team
+roles and delegate tasks to employees.
 
-Replace this content with a summary description of the actual project repository.
