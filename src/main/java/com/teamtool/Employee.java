@@ -3,7 +3,7 @@ package com.teamtool;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
-public abstract class Employee {
+public class Employee {
 
     private static int ID = 0;
     private String name;
