@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class Subordinate extends Employee{
 
-    public Subordinate(String name, LocalDate hiredate) {
-        super(name, hiredate);
+    public Subordinate() {
+        super();
     }
 
     void query() {
