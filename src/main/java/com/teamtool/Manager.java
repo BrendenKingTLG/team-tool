@@ -71,6 +71,7 @@ public class Manager extends Employee {
              BufferedWriter writer = new BufferedWriter(fw)) {
             writer.newLine();
             writer.write(String.format("%s,%s,%s,%s,%s,%s", firstName, lastName, hireDate, team, role, managerStatus));
+            System.out.println("\nemployee created");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,7 +101,7 @@ public class Manager extends Employee {
             String sb = Arrays.toString(employeeArray);
             sb = sb.replace("[", "");
             sb = sb.replace("]", "");
-            sb = sb.replace("\\s", "");
+            sb = sb.replaceAll("\\s+", "");
             str.append(sb);
             writer.write(String.valueOf(str));
             writer.close();
@@ -123,6 +124,7 @@ public class Manager extends Employee {
             PrintWriter writer = new PrintWriter(fileName);
             writer.print(str);
             writer.close();
+            System.out.println("\nemployee deleted");
         } catch (IOException e) {
             e.printStackTrace();
         }
