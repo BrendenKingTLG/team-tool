@@ -72,23 +72,36 @@ public class Manager extends Employee {
 
     }
 
-    public static void changeEmployee() throws IOException {
+    public static void changeEmployee() {
         query();
-        deleteEmployee();
-        Scanner in = new Scanner(System.in);
-        System.out.println("\nwhat do you want to change enter 0:first-name, 1:last-name, 2:hireDate, 3:team, 4:role, 5:managerStatus");
-        int test = in.nextInt();
-        in.nextLine();
-        System.out.println("enter desired change");
-        String change = in.nextLine();
-        employeeArray[test] = change;
-        System.out.println(Arrays.toString(employeeArray));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-        String sb = Arrays.toString(employeeArray);
-        sb = sb.replace("[", "");
-        sb = sb.replace("]", "");
-        sb = sb.replace("\\s", "");
-        writer.write(sb);
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            String line;
+            StringBuilder str = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                if (!line.startsWith(employeeArray[0]))
+                    str.append(line);
+                str.append("\n");
+            }
+            Scanner in = new Scanner(System.in);
+            System.out.println("\nwhat do you want to change enter 0:first-name, 1:last-name, 2:hireDate, 3:team, 4:role, 5:managerStatus");
+            int test = in.nextInt();
+            in.nextLine();
+            System.out.println("enter desired change");
+            String change = in.nextLine();
+            employeeArray[test] = change;
+            System.out.println(Arrays.toString(employeeArray));
+            PrintWriter writer = new PrintWriter(fileName);
+            String sb = Arrays.toString(employeeArray);
+            sb = sb.replace("[", "");
+            sb = sb.replace("]", "");
+            sb = sb.replace("\\s", "");
+            str.append(sb);
+            writer.write(String.valueOf(str));
+            writer.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public static void deleteEmployee() {
