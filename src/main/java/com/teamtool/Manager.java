@@ -88,12 +88,13 @@ public class Manager extends Employee{
 
     public static void deleteEmployee() {
         query();
-        System.out.println("\nEnter your name.");
         Scanner in = new Scanner(System.in);
-        String name = in.next();
-        System.out.println("\nName:" +name);
-        System.out.println("Exception found.");
-        in.remove();
-        in.close();
+        System.out.println("\nEnter the name of the person you would like to delete.");
+        int test = in.nextInt();
+        in.nextLine();
+        System.out.println("\nAre you sure you want to delete this person?");
+        String delete = in.nextLine();
+        employeeArray[test] = delete;
+        System.out.println(Arrays.toString(employeeArray));
     }
 }

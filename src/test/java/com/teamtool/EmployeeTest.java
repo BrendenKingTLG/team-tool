@@ -4,14 +4,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.FileReader;
+import java.io.IOException;
+
 public class EmployeeTest {
 
   //should a Map be included for the test class? if yes, which one?
 
   //also all annotated @tests below are subject to group members' approval. This is simply a draft template to collaborate on.
 
+
   @Test
-  void query() {
+  public void query() throws IOException {
+
   }
 
   @Test
@@ -30,7 +35,11 @@ public class EmployeeTest {
   }
 
   @Test
-  void findViaFirstName() {
+  void deleteEmployeeByFirstName() {
+    FileReader.deleteByFirstName("deja");
+    assertTrue();
+
+
     // final EmployeeInfo  employee-information = new EmployeeInfo();
     // employee-information.setFirstName("?");
     // Comparator or Comparable goes here?
