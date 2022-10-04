@@ -4,17 +4,17 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static com.teamtool.Login.fileName;
+import static com.teamtool.Login.employeeArray;
 
 public class Manager extends Employee {
-
-    private static final String fileName = "Employee.csv";
-    private static String[] employeeArray = new String[6];
 
     public Manager() {
         super();
     }
 
-    public static void query() {
+    @Override
+    public void query() {
         String result = "employee not found";
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
@@ -32,8 +32,8 @@ public class Manager extends Employee {
                     String team = employeeArray[3];
                     String role = employeeArray[4];
                     String managerStatus = employeeArray[5];
-                    result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s\n", firstName, lastName, hireDate, team, role, managerStatus);
-                    Manager.employeeArray = employeeArray;
+                    result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager:%s\n", firstName, lastName, hireDate, team, role, managerStatus);
+                    Login.employeeArray = employeeArray;
                 } else {
                     System.out.println("searching...");
                 }
@@ -46,14 +46,14 @@ public class Manager extends Employee {
     }
 
     ///test
-    public static void addEmployee() {
+    public void addEmployee() {
 
         Scanner input = new Scanner(System.in);
         System.out.println("please enter first name");
         String firstName = input.nextLine();
         System.out.println("please enter last name");
         String lastName = input.nextLine();
-        System.out.println("please enter a hire date");
+        System.out.println("please enter a hire date format: YYYY-MM-DD");
         String hireDate = input.nextLine();
         System.out.println("please enter a team");
         String team = input.nextLine();
@@ -72,7 +72,7 @@ public class Manager extends Employee {
 
     }
 
-    public static void changeEmployee() {
+    public void changeEmployee() {
         query();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -104,7 +104,7 @@ public class Manager extends Employee {
         }
     }
 
-    public static void deleteEmployee() {
+    public void deleteEmployee() {
         query();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
