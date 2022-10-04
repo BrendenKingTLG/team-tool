@@ -1,13 +1,19 @@
 package com.teamtool;
 
-public abstract class Employee {
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
 
+public class Employee {
 
-    public Employee(){
+    private static int ID = 0;
+    private String name;
+    private LocalDate hiredate;
 
+    public Employee(String name, LocalDate hiredate){
+        ID++;
+        this.name=name;
+        this.hiredate=hiredate;
     }
-
-    abstract void query();
 
 
 }
