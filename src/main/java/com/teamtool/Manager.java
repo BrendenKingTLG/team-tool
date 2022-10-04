@@ -1,53 +1,21 @@
 package com.teamtool;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class Manager extends Employee{
 
-    static String notFound = "employee not found";
-    static String fileName = "Employee.csv";
-    private static String[] employeeArray = new String[6];
+    public static String hireDate;
+    public static String team;
+    public static String role;
+    public static String isManager;
 
-    public Manager(String firstName, String lastName, LocalDate hireDate, String team, String role, Boolean isManager) {
-        super( firstName, lastName, hireDate, team, role, isManager );
+    public Manager() {
+        super();
     }
 
-    public static void query() {
-        String result = notFound;
-        Scanner in = new Scanner(System.in);
-        System.out.println("\nEnter employee name");
-        String findEmployee = in.nextLine();
-        try {
-            FileReader fr = new FileReader(fileName);
-            BufferedReader reader = new BufferedReader(fr);
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith(findEmployee)) {
-                    String[] employeeArray = line.split(",");
-                    String firstName = employeeArray[0];
-                    String lastName = employeeArray[1];
-                    String hireDate = employeeArray[2];
-                    String team = employeeArray[3];
-                    String role = employeeArray[4];
-                    String managerStatus = employeeArray[5];
-                    result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s\n", firstName, lastName, hireDate, team, role, managerStatus);
-                    Manager.employeeArray = employeeArray;
-                } else {
-                    System.out.println("searching...");
-                }
-            }
-            reader.close();
-            } catch(IOException e){
-                throw new RuntimeException(e);
-            }
-        System.out.println(result);
-    }
-            ///test
     public static void addEmployee() {
-
         Scanner input = new Scanner(System.in);
         System.out.println("please enter first name");
         String firstName = input.nextLine();
@@ -73,7 +41,39 @@ public class Manager extends Employee{
         }
     }
 
-    public static void changeEmployee() {
+    @Override
+    public void query() {
+        String result = notFound;
+        Scanner in = new Scanner(System.in);
+        System.out.println("\nEnter employee name");
+        String findEmployee = in.nextLine();
+        try {
+            FileReader fr = new FileReader(fileName);
+            BufferedReader reader = new BufferedReader(fr);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith(findEmployee)) {
+                    employeeArray = line.split(",");
+                    firstName = employeeArray[0];
+                    lastName = employeeArray[1];
+                    hireDate = employeeArray[2];
+                    team = employeeArray[3];
+                    role = employeeArray[4];
+                    isManager = employeeArray[5];
+                    System.out.println(Arrays.toString(employeeArray));
+                    result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s\n", firstName, lastName, hireDate, team, role, isManager);
+                } else {
+                    System.out.println("searching...");
+                }
+            }
+            reader.close();
+        } catch(IOException e){
+            throw new RuntimeException(e);
+        }
+        System.out.println(result);
+    }
+
+    public void changeEmployee() {
         query();
         Scanner in = new Scanner(System.in);
         System.out.println("\nwhat do you want to change enter 0:first-name, 1:last-name, 2:hireDate, 3:team, 4:role, 5:managerStatus");
@@ -97,6 +97,5 @@ public class Manager extends Employee{
         System.out.println("\nwhat do you want to change enter 0:first-name, 1:last-name, 2:hireDate, 3:team, 4:role, 5:managerStatus");
         int test = in.nextInt();
         in.nextLine();
-
     }
 }
