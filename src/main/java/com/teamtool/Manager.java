@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Manager extends Employee {
 
-    static String fileName = "Employee.csv";
+    private static final String fileName = "Employee.csv";
     private static String[] employeeArray = new String[6];
 
     public Manager() {
