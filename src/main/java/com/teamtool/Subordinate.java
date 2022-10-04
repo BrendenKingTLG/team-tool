@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import static com.teamtool.Login.fileName;
 
-public class Subordinate extends Employee{
+public class Subordinate extends Employee {
 
     public Subordinate() {
         super();

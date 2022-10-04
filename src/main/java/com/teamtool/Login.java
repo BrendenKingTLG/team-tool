@@ -7,11 +7,10 @@ import java.util.Scanner;
 
 public class Login {
     static final String fileName = "Employee.csv";
-    static String[] employeeArray = new String[6];
     public static String[] userArray = new String[6];
+    static String[] employeeArray = new String[6];
 
-
-    public static void authentication(){
+    public static void authentication() {
         System.out.println("Please enter your name");
         Scanner in = new Scanner(System.in);
         String user = in.nextLine();
@@ -56,7 +55,7 @@ public class Login {
             }
 
         }
-        if (userArray[5].equals("no")){
+        if (userArray[5].equals("no")) {
             Subordinate s = new Subordinate();
             s.query();
         }
