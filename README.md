@@ -1,5 +1,3 @@
-# Team Project
+# Team-Tool
 
-This is a template used as a starter project/repository for the team project executed in week 6.
-
-Replace this content with a summary description of the actual project repository.
+The Team-Tool application stores employee information in a CSV file. Managers can query, add, delete, and change employee information inside the CSV. Subordinates can only query the CSV to retrieve other team members' information. 
