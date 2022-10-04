@@ -3,25 +3,19 @@ package com.teamtool;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
-public class Subordinate extends Employee{
+import static com.teamtool.Login.fileName;
 
-    private static String hireDate;
-    private static String team;
-    private static String role;
+public class Subordinate extends Employee {
 
-    public Subordinate(String firstName, String lastName, String hireDate, String team, String role) {
+    public Subordinate() {
         super();
-        Subordinate.hireDate = hireDate;
-        Subordinate.team = team;
-        Subordinate.role = role;
     }
 
     @Override
     public void query() {
-        String result = notFound;
+        String result = "employee not found";
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
         String findEmployee = in.nextLine();
@@ -31,20 +25,19 @@ public class Subordinate extends Employee{
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith(findEmployee)) {
-                    employeeArray = line.split(",");
-                    firstName = employeeArray[0];
-                    lastName = employeeArray[1];
-                    hireDate = employeeArray[2];
-                    team = employeeArray[3];
-                    role = employeeArray[4];
-                    System.out.println(Arrays.toString(employeeArray));
-                    result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s\n", firstName, lastName, hireDate, team, role);
+                    String[] employeeArray = line.split(",");
+                    String firstName = employeeArray[0];
+                    String lastName = employeeArray[1];
+                    String team = employeeArray[3];
+                    String role = employeeArray[4];
+                    result = String.format("\nfirst-name:%s, last-name:%s, team:%s, role:%s\n", firstName, lastName, team, role);
+                    Login.employeeArray = employeeArray;
                 } else {
                     System.out.println("searching...");
                 }
             }
             reader.close();
-        } catch(IOException e){
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
         System.out.println(result);

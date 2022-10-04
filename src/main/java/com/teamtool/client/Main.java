@@ -1,11 +1,11 @@
 package com.teamtool.client;
 
-import java.io.IOException;
+
+import com.teamtool.Login;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-//        Manager.query();
-//        Login.employeeAuthentication();
-
+    public static void main(String[] args) {
+        Login.authentication();
+        Login.startApp();
     }
 }
