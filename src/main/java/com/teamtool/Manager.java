@@ -3,17 +3,17 @@ package com.teamtool;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Manager extends Employee{
 
     static String notFound = "employee not found";
     static String fileName = "Employee.csv";
     private static String[] employeeArray = new String[6];
+
     public Manager() {
         super();
     }
-
-
 
     public static void query() {
         String result = notFound;
@@ -62,19 +62,17 @@ public class Manager extends Employee{
         System.out.println("is this employee a manager");
         String managerStatus = input.nextLine();
         System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
-        try {
-            FileWriter fw =new FileWriter("Employee.csv", true);
-            BufferedWriter writer = new BufferedWriter(fw);
+        try (FileWriter fw =new FileWriter("Employee.csv", true);
+             BufferedWriter writer = new BufferedWriter(fw);){
             writer.newLine();
             writer.write(String.format("%s,%s,%s,%s,%s,%s", firstName, lastName, hireDate, team, role, managerStatus));
-            writer.close();
             } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public static void changeEmployee() {
+    public static void changeEmployee() throws IOException {
         query();
         Scanner in = new Scanner(System.in);
         System.out.println("\nwhat do you want to change enter 0:first-name, 1:last-name, 2:hireDate, 3:team, 4:role, 5:managerStatus");
@@ -84,14 +82,30 @@ public class Manager extends Employee{
         String change = in.nextLine();
         employeeArray[test] = change;
         System.out.println(Arrays.toString(employeeArray));
-    }
+        BufferedReader reader = new BufferedReader(new FileReader("Employee.csv"));
+        String line;
 
-    void deleteEmployee() {
+        }
+
+    public static void deleteEmployee() throws IOException {
         query();
-        Scanner in = new Scanner(System.in);
-        System.out.println("\nwhat do you want to change enter 0:first-name, 1:last-name, 2:hireDate, 3:team, 4:role, 5:managerStatus");
-        int test = in.nextInt();
-        in.nextLine();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            String line;
+            System.out.println("bye");
+            StringBuilder str = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                if(!line.startsWith(employeeArray[0]))
+                str.append(line);
+                str.append("\n");
+                }
+            System.out.println(str);
+            PrintWriter writer = new PrintWriter(fileName);
+            writer.print(str);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }
