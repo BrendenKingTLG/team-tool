@@ -4,17 +4,22 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import static com.teamtool.Login.*;
 
 public class Manager extends Employee {
-
-    private static final String fileName = "Employee.csv";
-    private static String[] employeeArray = new String[6];
+    private static String firstName;
+    private static String lastName;
+    private static String hireDate;
+    private static String team;
+    private static String role;
+    private static String managerStatus;
 
     public Manager() {
         super();
     }
 
-    public static void query() {
+    @Override
+    public void query() {
         String result = "employee not found";
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
@@ -26,14 +31,14 @@ public class Manager extends Employee {
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith(findEmployee)) {
                     String[] employeeArray = line.split(",");
-                    String firstName = employeeArray[0];
-                    String lastName = employeeArray[1];
-                    String hireDate = employeeArray[2];
-                    String team = employeeArray[3];
-                    String role = employeeArray[4];
-                    String managerStatus = employeeArray[5];
-                    result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s\n", firstName, lastName, hireDate, team, role, managerStatus);
-                    Manager.employeeArray = employeeArray;
+                    firstName = employeeArray[0];
+                    lastName = employeeArray[1];
+                    hireDate = employeeArray[2];
+                    team = employeeArray[3];
+                    role = employeeArray[4];
+                    managerStatus = employeeArray[5];
+                    result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager:%s\n", firstName, lastName, hireDate, team, role, managerStatus);
+                    Login.employeeArray = employeeArray;
                 } else {
                     System.out.println("searching...");
                 }
@@ -46,33 +51,34 @@ public class Manager extends Employee {
     }
 
     ///test
-    public static void addEmployee() {
+    public void addEmployee() {
 
         Scanner input = new Scanner(System.in);
         System.out.println("please enter first name");
-        String firstName = input.nextLine();
+        firstName = input.nextLine();
         System.out.println("please enter last name");
-        String lastName = input.nextLine();
-        System.out.println("please enter a hire date");
-        String hireDate = input.nextLine();
+        lastName = input.nextLine();
+        System.out.println("please enter a hire date format: YYYY-MM-DD");
+        hireDate = input.nextLine();
         System.out.println("please enter a team");
-        String team = input.nextLine();
+        team = input.nextLine();
         System.out.println("please enter a role");
-        String role = input.nextLine();
+        role = input.nextLine();
         System.out.println("is this employee a manager");
-        String managerStatus = input.nextLine();
+        managerStatus = input.nextLine();
         System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
             writer.newLine();
             writer.write(String.format("%s,%s,%s,%s,%s,%s", firstName, lastName, hireDate, team, role, managerStatus));
+            System.out.println("\nemployee created");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    public static void changeEmployee() {
+    public void changeEmployee() {
         query();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -95,7 +101,7 @@ public class Manager extends Employee {
             String sb = Arrays.toString(employeeArray);
             sb = sb.replace("[", "");
             sb = sb.replace("]", "");
-            sb = sb.replace("\\s", "");
+            sb = sb.replaceAll("\\s+", "");
             str.append(sb);
             writer.write(String.valueOf(str));
             writer.close();
@@ -104,7 +110,7 @@ public class Manager extends Employee {
         }
     }
 
-    public static void deleteEmployee() {
+    public void deleteEmployee() {
         query();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -118,6 +124,7 @@ public class Manager extends Employee {
             PrintWriter writer = new PrintWriter(fileName);
             writer.print(str);
             writer.close();
+            System.out.println("\nemployee deleted");
         } catch (IOException e) {
             e.printStackTrace();
         }

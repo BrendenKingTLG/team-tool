@@ -7,5 +7,7 @@ public abstract class Employee {
 
     }
 
+    abstract void query();
+
 
 }
