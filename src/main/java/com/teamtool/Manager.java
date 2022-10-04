@@ -1,6 +1,7 @@
 package com.teamtool;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -9,11 +10,10 @@ public class Manager extends Employee{
     static String notFound = "employee not found";
     static String fileName = "Employee.csv";
     private static String[] employeeArray = new String[6];
-    public Manager() {
-        super();
+
+    public Manager(String firstName, String lastName, LocalDate hireDate, String team, String role, Boolean isManager) {
+        super( firstName, lastName, hireDate, team, role, isManager );
     }
-
-
 
     public static void query() {
         String result = notFound;
@@ -71,7 +71,6 @@ public class Manager extends Employee{
             } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static void changeEmployee() {
@@ -83,11 +82,17 @@ public class Manager extends Employee{
         System.out.println("enter desired change");
         String change = in.nextLine();
         employeeArray[test] = change;
+        try(BufferedWriter writer= new BufferedWriter(new FileWriter("Employee.csv", true))){
+            writer.newLine();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(Arrays.toString(employeeArray));
     }
 
     void deleteEmployee() {
         query();
+        StringBuilder stringBuilder = new StringBuilder();
         Scanner in = new Scanner(System.in);
         System.out.println("\nwhat do you want to change enter 0:first-name, 1:last-name, 2:hireDate, 3:team, 4:role, 5:managerStatus");
         int test = in.nextInt();
