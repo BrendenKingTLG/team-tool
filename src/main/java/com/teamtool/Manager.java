@@ -4,10 +4,15 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static com.teamtool.Login.fileName;
-import static com.teamtool.Login.employeeArray;
+import static com.teamtool.Login.*;
 
 public class Manager extends Employee {
+    private static String firstName;
+    private static String lastName;
+    private static String hireDate;
+    private static String team;
+    private static String role;
+    private static String managerStatus;
 
     public Manager() {
         super();
@@ -26,12 +31,12 @@ public class Manager extends Employee {
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith(findEmployee)) {
                     String[] employeeArray = line.split(",");
-                    String firstName = employeeArray[0];
-                    String lastName = employeeArray[1];
-                    String hireDate = employeeArray[2];
-                    String team = employeeArray[3];
-                    String role = employeeArray[4];
-                    String managerStatus = employeeArray[5];
+                    firstName = employeeArray[0];
+                    lastName = employeeArray[1];
+                    hireDate = employeeArray[2];
+                    team = employeeArray[3];
+                    role = employeeArray[4];
+                    managerStatus = employeeArray[5];
                     result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager:%s\n", firstName, lastName, hireDate, team, role, managerStatus);
                     Login.employeeArray = employeeArray;
                 } else {
@@ -50,17 +55,17 @@ public class Manager extends Employee {
 
         Scanner input = new Scanner(System.in);
         System.out.println("please enter first name");
-        String firstName = input.nextLine();
+        firstName = input.nextLine();
         System.out.println("please enter last name");
-        String lastName = input.nextLine();
+        lastName = input.nextLine();
         System.out.println("please enter a hire date format: YYYY-MM-DD");
-        String hireDate = input.nextLine();
+        hireDate = input.nextLine();
         System.out.println("please enter a team");
-        String team = input.nextLine();
+        team = input.nextLine();
         System.out.println("please enter a role");
-        String role = input.nextLine();
+        role = input.nextLine();
         System.out.println("is this employee a manager");
-        String managerStatus = input.nextLine();
+        managerStatus = input.nextLine();
         System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {

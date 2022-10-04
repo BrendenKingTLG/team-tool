@@ -10,6 +10,7 @@ public class Login {
     static String[] employeeArray = new String[6];
     public static String[] userArray = new String[6];
 
+
     public static void authentication(){
         System.out.println("Please enter your name");
         Scanner in = new Scanner(System.in);
