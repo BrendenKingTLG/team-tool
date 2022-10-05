@@ -39,8 +39,6 @@ public class Manager extends Employee {
                     managerStatus = employeeArray[5];
                     result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager:%s\n", firstName, lastName, hireDate, team, role, managerStatus);
                     Login.employeeArray = employeeArray;
-                } else {
-                    System.out.println("searching...");
                 }
             }
             reader.close();
@@ -108,6 +106,30 @@ public class Manager extends Employee {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void searchByTeam() throws FileNotFoundException {
+        String result = "team not found";
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the name of the team");
+        String teamName = in.nextLine();
+        try{
+            FileReader fr = new FileReader(fileName);
+            BufferedReader reader = new BufferedReader(fr);
+            String line;
+            while ((line = reader.readLine()) != null){
+                if(line.contains(teamName)){
+                    String[] teamArray = line.split(",");
+//                    System.out.println(Arrays.toString(teamArray) + "team Array");
+                    System.out.printf("The members of %s are listed below: %s", teamName, Arrays.toString(teamArray));
+//                    result = String.format("\n The members of %s are listed below: \n", teamName);
+                }
+            }
+            reader.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public void deleteEmployee() {

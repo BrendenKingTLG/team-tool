@@ -1,8 +1,10 @@
 package com.teamtool;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Login {
@@ -29,10 +31,10 @@ public class Login {
         }
     }//
 
-    public static void startApp() {
+    public static void startApp() throws FileNotFoundException {
         if (userArray[5].equals("yes")) {
             Manager m = new Manager();
-            System.out.println("what would you like to do? 0:query, 1:add-employee, 2:change-employee, 3:delete-employee");
+            System.out.println("what would you like to do? 0:query, 1:add-employee, 2:change-employee, 3:delete-employee, 4:search-by-team");
             Scanner in = new Scanner(System.in);
             int input = in.nextInt();
             in.nextLine();
@@ -48,6 +50,9 @@ public class Login {
                     break;
                 case 3:
                     m.deleteEmployee();
+                    break;
+                case 4:
+                    m.searchByTeam();
                     break;
                 default:
                     System.out.println("you did not choose a valid option");
