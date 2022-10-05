@@ -4,8 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
-
-import static com.teamtool.Login.fileName;
+import static com.teamtool.Login.*;
 
 public class Subordinate extends Employee {
 
@@ -32,8 +31,6 @@ public class Subordinate extends Employee {
                     String role = employeeArray[4];
                     result = String.format("\nfirst-name:%s, last-name:%s, team:%s, role:%s\n", firstName, lastName, team, role);
                     Login.employeeArray = employeeArray;
-                } else {
-                    System.out.println("searching...");
                 }
             }
             reader.close();
@@ -41,5 +38,7 @@ public class Subordinate extends Employee {
             throw new RuntimeException(e);
         }
         System.out.println(result);
+        startApp();
     }
+
 }
