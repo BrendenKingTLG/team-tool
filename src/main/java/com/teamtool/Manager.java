@@ -1,6 +1,7 @@
 package com.teamtool;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class Manager extends Employee {
         String result = "employee not found";
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
-        String findEmployee = in.nextLine();
+        String findEmployee = in.nextLine().toLowerCase();
         try {
             FileReader fr = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(fr);
@@ -39,8 +40,6 @@ public class Manager extends Employee {
                     managerStatus = employeeArray[5];
                     result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager:%s\n", firstName, lastName, hireDate, team, role, managerStatus);
                     Login.employeeArray = employeeArray;
-                } else {
-                    System.out.println("searching...");
                 }
             }
             reader.close();
@@ -50,22 +49,8 @@ public class Manager extends Employee {
         System.out.println(result);
     }
 
-    ///test
     public void addEmployee() {
-
-        Scanner input = new Scanner(System.in);
-        System.out.println("please enter first name");
-        firstName = input.nextLine();
-        System.out.println("please enter last name");
-        lastName = input.nextLine();
-        System.out.println("please enter a hire date format: YYYY-MM-DD");
-        hireDate = input.nextLine();
-        System.out.println("please enter a team");
-        team = input.nextLine();
-        System.out.println("please enter a role");
-        role = input.nextLine();
-        System.out.println("is this employee a manager");
-        managerStatus = input.nextLine();
+        getUserInput();
         System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
@@ -129,5 +114,25 @@ public class Manager extends Employee {
             e.printStackTrace();
         }
 
+    }
+
+    public void getUserInput(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("please enter first name");
+        firstName = input.nextLine().toLowerCase();
+        System.out.println("please enter last name");
+        lastName = input.nextLine().toLowerCase();
+        System.out.println("please enter a hire date format: YYYY-MM-DD");
+        hireDate = input.nextLine();
+        if (!hireDate.matches("\\d{4}-\\d{2}-\\d{2}")){
+            System.out.println("please enter correct date");
+            return;
+        }
+        System.out.println("please enter a team");
+        team = input.nextLine().toLowerCase();
+        System.out.println("please enter a role");
+        role = input.nextLine().toLowerCase();
+        System.out.println("is this employee a manager");
+        managerStatus = input.nextLine().toLowerCase();
     }
 }

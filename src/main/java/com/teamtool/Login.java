@@ -32,7 +32,7 @@ public class Login {
     public static void startApp() {
         if (userArray[5].equals("yes")) {
             Manager m = new Manager();
-            System.out.println("what would you like to do? 0:query, 1:add-employee, 2:change-employee, 3:delete-employee");
+            System.out.println("what would you like to do? 0:query-firstname, 1:add-employee, 2:change-employee, 3:delete-employee");
             Scanner in = new Scanner(System.in);
             int input = in.nextInt();
             in.nextLine();
