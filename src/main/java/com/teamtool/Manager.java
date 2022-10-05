@@ -79,7 +79,6 @@ import java.util.Scanner;import static com.teamtool.Login.*;
     }
 
     public void addEmployee(String[] addEmployeeArray) throws FileNotFoundException {
-//        System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
                 writer.newLine();
