@@ -5,11 +5,8 @@ import java.time.LocalDate;
 
 public abstract class Employee {
 
-
     public Employee(){
-
     }
 
-
-    public abstract void query();
+    public abstract void query() throws FileNotFoundException;
 }
