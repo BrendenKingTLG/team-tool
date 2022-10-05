@@ -27,7 +27,7 @@ public class Login {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }//
 
     public static void startApp() {
         if (userArray[5].equals("yes")) {
