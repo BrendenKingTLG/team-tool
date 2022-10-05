@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 import static com.teamtool.Login.*;
 
 public class Manager extends Employee {
@@ -19,11 +20,11 @@ public class Manager extends Employee {
     }
 
     @Override
-    public void query() {
+    public void searchByName() throws FileNotFoundException {
         String result = "employee not found";
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
-        String findEmployee = in.nextLine();
+        String findEmployee = in.nextLine().toLowerCase();
         try {
             FileReader fr = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(fr);
@@ -39,47 +40,56 @@ public class Manager extends Employee {
                     managerStatus = employeeArray[5];
                     result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager:%s\n", firstName, lastName, hireDate, team, role, managerStatus);
                     Login.employeeArray = employeeArray;
-                } else {
-                    System.out.println("searching...");
                 }
             }
             reader.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileNotFoundException("could not find file");
         }
         System.out.println(result);
     }
 
-    ///test
-    public void addEmployee() {
+    @Override
+    public void searchByTeam() throws FileNotFoundException {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the name of the team");
+        String teamName = in.nextLine();
+        try{
+            FileReader fr = new FileReader(fileName);
+            BufferedReader reader = new BufferedReader(fr);
+            String line;
+            System.out.printf("The members of the %s are listed below:%n", teamName);
+            while ((line = reader.readLine()) != null){
+                if(line.contains(teamName)){
+                    String[] teamArray = line.split(",");
+                    String output = Arrays.toString(teamArray);
+                    System.out.println( output );
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new FileNotFoundException("file not found");
+        }
+        startApp();
+    }
 
-        Scanner input = new Scanner(System.in);
-        System.out.println("please enter first name");
-        firstName = input.nextLine();
-        System.out.println("please enter last name");
-        lastName = input.nextLine();
-        System.out.println("please enter a hire date format: YYYY-MM-DD");
-        hireDate = input.nextLine();
-        System.out.println("please enter a team");
-        team = input.nextLine();
-        System.out.println("please enter a role");
-        role = input.nextLine();
-        System.out.println("is this employee a manager");
-        managerStatus = input.nextLine();
+    public void addEmployee() throws FileNotFoundException {
+        getUserInput();
         System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
-            writer.newLine();
-            writer.write(String.format("%s,%s,%s,%s,%s,%s", firstName, lastName, hireDate, team, role, managerStatus));
-            System.out.println("\nemployee created");
+                writer.newLine();
+                writer.write(String.format("%s,%s,%s,%s,%s,%s", firstName, lastName, hireDate, team, role, managerStatus));
+                System.out.println("\nemployee created");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        startApp();
 
     }
 
-    public void changeEmployee() {
-        query();
+    public void changeEmployee() throws FileNotFoundException {
+        searchByName();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
@@ -94,7 +104,7 @@ public class Manager extends Employee {
             int test = in.nextInt();
             in.nextLine();
             System.out.println("enter desired change");
-            String change = in.nextLine();
+            String change = in.nextLine().toLowerCase();
             employeeArray[test] = change;
             System.out.println(Arrays.toString(employeeArray));
             PrintWriter writer = new PrintWriter(fileName);
@@ -108,10 +118,11 @@ public class Manager extends Employee {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        startApp();
     }
 
-    public void deleteEmployee() {
-        query();
+    public void deleteEmployee() throws FileNotFoundException {
+        searchByName();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
@@ -128,6 +139,28 @@ public class Manager extends Employee {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        startApp();
 
     }
+
+    public void getUserInput(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("please enter first name");
+        firstName = input.nextLine().toLowerCase();
+        System.out.println("please enter last name");
+        lastName = input.nextLine().toLowerCase();
+        System.out.println("please enter a hire date format: YYYY-MM-DD");
+        hireDate = input.nextLine();
+        while (!hireDate.matches("\\d{4}-\\d{2}-\\d{2}")){
+            System.out.println("please enter correct format ex:YYYY-MM-DD");
+            hireDate = input.nextLine();
+        }
+        System.out.println("please enter a team");
+        team = input.nextLine().toLowerCase();
+        System.out.println("please enter a role");
+        role = input.nextLine().toLowerCase();
+        System.out.println("is this employee a manager");
+        managerStatus = input.nextLine().toLowerCase();
+    }
+
 }
