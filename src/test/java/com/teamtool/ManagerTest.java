@@ -11,7 +11,6 @@ class ManagerTest {
     @Test
     void query() throws FileNotFoundException {
         Manager m = new Manager();
-        m.searchByTeam();
     }
 
     @Test
