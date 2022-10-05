@@ -20,7 +20,7 @@ public class Manager extends Employee {
     }
 
     @Override
-    public void query() {
+    public void searchByName() throws FileNotFoundException {
         String result = "employee not found";
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
@@ -44,12 +44,36 @@ public class Manager extends Employee {
             }
             reader.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileNotFoundException("could not find file");
         }
         System.out.println(result);
     }
 
-    public void addEmployee() {
+    @Override
+    public void searchByTeam() throws FileNotFoundException {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the name of the team");
+        String teamName = in.nextLine();
+        try{
+            FileReader fr = new FileReader(fileName);
+            BufferedReader reader = new BufferedReader(fr);
+            String line;
+            System.out.printf("The members of the %s are listed below:%n", teamName);
+            while ((line = reader.readLine()) != null){
+                if(line.contains(teamName)){
+                    String[] teamArray = line.split(",");
+                    String output = Arrays.toString(teamArray);
+                    System.out.println( output );
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            throw new FileNotFoundException("file not found");
+        }
+        startApp();
+    }
+
+    public void addEmployee() throws FileNotFoundException {
         getUserInput();
         System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
         try (FileWriter fw = new FileWriter("Employee.csv", true);
@@ -64,8 +88,8 @@ public class Manager extends Employee {
 
     }
 
-    public void changeEmployee() {
-        query();
+    public void changeEmployee() throws FileNotFoundException {
+        searchByName();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
@@ -97,8 +121,8 @@ public class Manager extends Employee {
         startApp();
     }
 
-    public void deleteEmployee() {
-        query();
+    public void deleteEmployee() throws FileNotFoundException {
+        searchByName();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;

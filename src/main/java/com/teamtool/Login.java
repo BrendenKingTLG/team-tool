@@ -1,6 +1,7 @@
 package com.teamtool;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
@@ -35,17 +36,17 @@ public class Login {
             }
 }
 
-    public static void startApp() {
+    public static void startApp() throws FileNotFoundException {
         if (auth) {
             if (userArray[5].equals("yes")) {
                 Manager m = new Manager();
-                System.out.println("what would you like to do? 0:query-firstname, 1:add-employee, 2:change-employee, 3:delete-employee");
+                System.out.println("what would you like to do? 0:search-firstname, 1:add-employee, 2:change-employee, 3:delete-employee, 4: search-team");
                 Scanner in = new Scanner(System.in);
                 int input = in.nextInt();
                 in.nextLine();
                 switch (input) {
                     case 0:
-                        m.query();
+                        m.searchByName();
                         break;
                     case 1:
                         m.addEmployee();
@@ -56,6 +57,9 @@ public class Login {
                     case 3:
                         m.deleteEmployee();
                         break;
+                    case 4:
+                        m.searchByTeam();
+                        break;
                     default:
                         System.out.println("you did not choose a valid option");
                         break;
@@ -63,7 +67,7 @@ public class Login {
             }
             if (userArray[5].equals("no")) {
                 Subordinate s = new Subordinate();
-                s.query();
+                s.searchByName();
             }
         } else {
             System.out.println("not authenticated");
