@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 import static com.teamtool.Login.*;
 
 public class Manager extends Employee {
@@ -53,12 +54,13 @@ public class Manager extends Employee {
         System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
-            writer.newLine();
-            writer.write(String.format("%s,%s,%s,%s,%s,%s", firstName, lastName, hireDate, team, role, managerStatus));
-            System.out.println("\nemployee created");
+                writer.newLine();
+                writer.write(String.format("%s,%s,%s,%s,%s,%s", firstName, lastName, hireDate, team, role, managerStatus));
+                System.out.println("\nemployee created");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        startApp();
 
     }
 
@@ -78,7 +80,7 @@ public class Manager extends Employee {
             int test = in.nextInt();
             in.nextLine();
             System.out.println("enter desired change");
-            String change = in.nextLine();
+            String change = in.nextLine().toLowerCase();
             employeeArray[test] = change;
             System.out.println(Arrays.toString(employeeArray));
             PrintWriter writer = new PrintWriter(fileName);
@@ -92,6 +94,7 @@ public class Manager extends Employee {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        startApp();
     }
 
     public void deleteEmployee() {
@@ -112,6 +115,7 @@ public class Manager extends Employee {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        startApp();
 
     }
 
@@ -123,9 +127,9 @@ public class Manager extends Employee {
         lastName = input.nextLine().toLowerCase();
         System.out.println("please enter a hire date format: YYYY-MM-DD");
         hireDate = input.nextLine();
-        if (!hireDate.matches("\\d{4}-\\d{2}-\\d{2}")){
-            System.out.println("please enter correct date");
-            return;
+        while (!hireDate.matches("\\d{4}-\\d{2}-\\d{2}")){
+            System.out.println("please enter correct format ex:YYYY-MM-DD");
+            hireDate = input.nextLine();
         }
         System.out.println("please enter a team");
         team = input.nextLine().toLowerCase();
@@ -134,4 +138,5 @@ public class Manager extends Employee {
         System.out.println("is this employee a manager");
         managerStatus = input.nextLine().toLowerCase();
     }
+
 }

@@ -15,7 +15,7 @@ public class Login {
     public static void authentication() {
             System.out.println("Please enter your name");
             Scanner in = new Scanner(System.in);
-            String user = in.nextLine();
+            String user = in.nextLine().toLowerCase();
             try (BufferedReader reader = new BufferedReader( new FileReader(fileName))){
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -23,6 +23,7 @@ public class Login {
                         userArray = line.split(",");
                         if (Objects.equals(userArray[0], user)){
                             auth = true;
+                            System.out.println("hi " + userArray[0] + "!");
                         }
                     }
                 }
@@ -32,7 +33,7 @@ public class Login {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-}//
+}
 
     public static void startApp() {
         if (auth) {
@@ -59,7 +60,6 @@ public class Login {
                         System.out.println("you did not choose a valid option");
                         break;
                 }
-
             }
             if (userArray[5].equals("no")) {
                 Subordinate s = new Subordinate();
