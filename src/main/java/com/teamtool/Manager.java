@@ -8,12 +8,7 @@ import java.util.Scanner;
 import static com.teamtool.Login.*;
 
 public class Manager extends Employee {
-    private static String firstName;
-    private static String lastName;
-    private static String hireDate;
-    private static String team;
-    private static String role;
-    private static String managerStatus;
+    private final String[] addEmployeeArray = new String[6];
 
     public Manager() {
         super();
@@ -21,39 +16,39 @@ public class Manager extends Employee {
 
     @Override
     public void searchByName() throws FileNotFoundException {
-        String result = "employee not found";
-        Scanner in = new Scanner(System.in);
-        System.out.println("\nEnter employee name");
-        String findEmployee = in.nextLine().toLowerCase();
-        try {
-            FileReader fr = new FileReader(fileName);
-            BufferedReader reader = new BufferedReader(fr);
-            String line;
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith(findEmployee)) {
-                    String[] employeeArray = line.split(",");
-                    firstName = employeeArray[0];
-                    lastName = employeeArray[1];
-                    hireDate = employeeArray[2];
-                    team = employeeArray[3];
-                    role = employeeArray[4];
-                    managerStatus = employeeArray[5];
-                    result = String.format("" +
-                            "first-name:   %s%n" +
-                            "last-name:    %s%n" +
-                            "hire-date:    %s%n" +
-                            "team:         %s%n" +
-                            "role:         %s%n" +
-                            "is-manager:   %s%n",
-                            firstName, lastName, hireDate, team, role, managerStatus);
-                    Login.employeeArray = employeeArray;
-                }
-            }
-            reader.close();
-        } catch (IOException e) {
-            throw new FileNotFoundException("could not find file");
-        }
-        System.out.println(result);
+//        String result = "employee not found";
+//        Scanner in = new Scanner(System.in);
+//        System.out.println("\nEnter employee name");
+//        String findEmployee = in.nextLine().toLowerCase();
+//        try {
+//            FileReader fr = new FileReader(fileName);
+//            BufferedReader reader = new BufferedReader(fr);
+//            String line;
+//            while ((line = reader.readLine()) != null) {
+//                if (line.startsWith(findEmployee)) {
+//                    String[] employeeArray = line.split(",");
+//                    firstName = employeeArray[0];
+//                    lastName = employeeArray[1];
+//                    hireDate = employeeArray[2];
+//                    team = employeeArray[3];
+//                    role = employeeArray[4];
+//                    managerStatus = employeeArray[5];
+//                    result = String.format("" +
+//                            "first-name:   %s%n" +
+//                            "last-name:    %s%n" +
+//                            "hire-date:    %s%n" +
+//                            "team:         %s%n" +
+//                            "role:         %s%n" +
+//                            "is-manager:   %s%n",
+//                            firstName, lastName, hireDate, team, role, managerStatus);
+//                    Login.employeeArray = employeeArray;
+//                }
+//            }
+//            reader.close();
+//        } catch (IOException e) {
+//            throw new FileNotFoundException("could not find file");
+//        }
+//        System.out.println(result);
     }
 
     @Override
@@ -80,13 +75,12 @@ public class Manager extends Employee {
         startApp();
     }
 
-    public void addEmployee() throws FileNotFoundException {
-        getUserInput();
-        System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
+    public void addEmployee(String[] addEmployeeArray) throws FileNotFoundException {
+//        System.out.printf("first-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager: %s", firstName, lastName, hireDate, team, role, managerStatus);
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
                 writer.newLine();
-                writer.write(String.format("%s,%s,%s,%s,%s,%s", firstName, lastName, hireDate, team, role, managerStatus));
+                writer.write(String.format("%s,%s,%s,%s,%s,%s", addEmployeeArray[0], addEmployeeArray[1], addEmployeeArray[2], addEmployeeArray[3], addEmployeeArray[4], addEmployeeArray[5]));
                 System.out.println("\nemployee created");
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,24 +142,25 @@ public class Manager extends Employee {
         startApp();
     }
 
-    public void getUserInput(){
+    public void getUserInputForNewEmployee() throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         System.out.println("please enter first name");
-        firstName = input.nextLine().toLowerCase();
+        this.addEmployeeArray[0] = input.nextLine().toLowerCase();
         System.out.println("please enter last name");
-        lastName = input.nextLine().toLowerCase();
+        this.addEmployeeArray[1] = input.nextLine().toLowerCase();
         System.out.println("please enter a hire date format: YYYY-MM-DD");
-        hireDate = input.nextLine();
-        while (!hireDate.matches("\\d{4}-\\d{2}-\\d{2}")){
+        this.addEmployeeArray[2] = input.nextLine();
+        while (!this.addEmployeeArray[2].matches("\\d{4}-\\d{2}-\\d{2}")){
             System.out.println("please enter correct format ex:YYYY-MM-DD");
-            hireDate = input.nextLine();
+            this.addEmployeeArray[2] = input.nextLine();
         }
         System.out.println("please enter a team");
-        team = input.nextLine().toLowerCase();
+        this.addEmployeeArray[3] = input.nextLine().toLowerCase();
         System.out.println("please enter a role");
-        role = input.nextLine().toLowerCase();
+        this.addEmployeeArray[4] = input.nextLine().toLowerCase();
         System.out.println("is this employee a manager");
-        managerStatus = input.nextLine().toLowerCase();
+        this.addEmployeeArray[5] = input.nextLine().toLowerCase();
+        addEmployee(addEmployeeArray);
     }
 
 }

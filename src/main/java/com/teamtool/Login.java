@@ -52,7 +52,7 @@ public class Login {
                         m.searchByTeam();
                         break;
                     case 2:
-                        m.addEmployee();
+                        m.getUserInputForNewEmployee();
                         break;
                     case 3:
                         m.deleteEmployee();
