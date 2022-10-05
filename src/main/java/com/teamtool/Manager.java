@@ -38,7 +38,14 @@ public class Manager extends Employee {
                     team = employeeArray[3];
                     role = employeeArray[4];
                     managerStatus = employeeArray[5];
-                    result = String.format("\nfirst-name:%s, last-name:%s, hire-date:%s, team:%s, role:%s, is-manager:%s\n", firstName, lastName, hireDate, team, role, managerStatus);
+                    result = String.format("" +
+                            "first-name:   %s%n" +
+                            "last-name:    %s%n" +
+                            "hire-date:    %s%n" +
+                            "team:         %s%n" +
+                            "role:         %s%n" +
+                            "is-manager:   %s%n",
+                            firstName, lastName, hireDate, team, role, managerStatus);
                     Login.employeeArray = employeeArray;
                 }
             }
