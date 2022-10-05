@@ -49,7 +49,6 @@ public class Manager extends Employee {
         startApp();
     }
 
-    ///test
     public void addEmployee() throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         System.out.println("please enter first name");
@@ -110,7 +109,6 @@ public class Manager extends Employee {
     }
 
     public void searchByTeam() throws FileNotFoundException {
-        String result = "team not found";
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter the name of the team");
         String teamName = in.nextLine();
