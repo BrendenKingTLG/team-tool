@@ -1,11 +1,13 @@
 package com.teamtool;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
 import static com.teamtool.Login.fileName;
+import static com.teamtool.Login.startApp;
 
 public class Subordinate extends Employee {
 
@@ -14,7 +16,7 @@ public class Subordinate extends Employee {
     }
 
     @Override
-    public void query() {
+    public void query() throws FileNotFoundException {
         String result = "employee not found";
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
@@ -41,5 +43,6 @@ public class Subordinate extends Employee {
             throw new RuntimeException(e);
         }
         System.out.println(result);
+        startApp();
     }
 }

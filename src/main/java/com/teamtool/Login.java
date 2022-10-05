@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Login {
@@ -29,7 +28,7 @@ public class Login {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }//
+    }
 
     public static void startApp() throws FileNotFoundException {
         if (userArray[5].equals("yes")) {
@@ -58,7 +57,6 @@ public class Login {
                     System.out.println("you did not choose a valid option");
                     break;
             }
-
         }
         if (userArray[5].equals("no")) {
             Subordinate s = new Subordinate();

@@ -19,7 +19,7 @@ public class Manager extends Employee {
     }
 
     @Override
-    public void query() {
+    public void query() throws FileNotFoundException {
         String result = "employee not found";
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
@@ -46,11 +46,11 @@ public class Manager extends Employee {
             throw new RuntimeException(e);
         }
         System.out.println(result);
+        startApp();
     }
 
     ///test
-    public void addEmployee() {
-
+    public void addEmployee() throws FileNotFoundException {
         Scanner input = new Scanner(System.in);
         System.out.println("please enter first name");
         firstName = input.nextLine();
@@ -73,10 +73,10 @@ public class Manager extends Employee {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        startApp();
     }
 
-    public void changeEmployee() {
+    public void changeEmployee() throws FileNotFoundException {
         query();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -106,6 +106,7 @@ public class Manager extends Employee {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        startApp();
     }
 
     public void searchByTeam() throws FileNotFoundException {
@@ -117,22 +118,22 @@ public class Manager extends Employee {
             FileReader fr = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(fr);
             String line;
+            System.out.printf("The members of the %s are listed below:%n", teamName);
             while ((line = reader.readLine()) != null){
                 if(line.contains(teamName)){
                     String[] teamArray = line.split(",");
-//                    System.out.println(Arrays.toString(teamArray) + "team Array");
-                    System.out.printf("The members of %s are listed below: %s", teamName, Arrays.toString(teamArray));
-//                    result = String.format("\n The members of %s are listed below: \n", teamName);
+                    String output = Arrays.toString(teamArray);
+                    System.out.println( output );
                 }
             }
             reader.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
+        startApp();
     }
 
-    public void deleteEmployee() {
+    public void deleteEmployee() throws FileNotFoundException {
         query();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -150,6 +151,6 @@ public class Manager extends Employee {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        startApp();
     }
 }
