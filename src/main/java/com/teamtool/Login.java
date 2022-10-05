@@ -40,7 +40,7 @@ public class Login {
         if (auth) {
             if (userArray[5].equals("yes")) {
                 Manager m = new Manager();
-                System.out.println("what would you like to do? 0:search-firstname, 1:add-employee, 2:change-employee, 3:delete-employee, 4: search-team");
+                System.out.println("what would you like to do? 0:search-name, 1:search-team, 2:add-employee, 3:delete-employee, 4:change-employee");
                 Scanner in = new Scanner(System.in);
                 int input = in.nextInt();
                 in.nextLine();
@@ -49,16 +49,16 @@ public class Login {
                         m.searchByName();
                         break;
                     case 1:
-                        m.addEmployee();
+                        m.searchByTeam();
                         break;
                     case 2:
-                        m.changeEmployee();
+                        m.addEmployee();
                         break;
                     case 3:
                         m.deleteEmployee();
                         break;
                     case 4:
-                        m.searchByTeam();
+                        m.changeEmployee();
                         break;
                     default:
                         System.out.println("you did not choose a valid option");

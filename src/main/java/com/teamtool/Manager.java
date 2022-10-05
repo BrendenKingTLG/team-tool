@@ -85,7 +85,6 @@ public class Manager extends Employee {
             e.printStackTrace();
         }
         startApp();
-
     }
 
     public void changeEmployee() throws FileNotFoundException {
@@ -140,7 +139,6 @@ public class Manager extends Employee {
             e.printStackTrace();
         }
         startApp();
-
     }
 
     public void getUserInput(){
