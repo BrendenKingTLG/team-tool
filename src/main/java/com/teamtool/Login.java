@@ -41,12 +41,12 @@ public class Login {
                 if (userArray[5].equals("yes")) {
                     Manager m = new Manager();
                     System.out.printf("What would you like to do?%n"
-                                    + "0: Quit%n"
                                     + "1: Search by team name%n"
                                     + "2: Search by first name%n"
                                     + "3: Delete an employee%n"
                                     + "4: Update employee information%n"
-                                    + "5: Add a new employee%n");
+                                    + "5: Add a new employee%n"
+                                    + "0: Quit%n");
                     Scanner in = new Scanner(System.in);
                     int input = in.nextInt();
                     in.nextLine();
@@ -76,9 +76,9 @@ public class Login {
                 if (userArray[5].equals("no")) {
                     Subordinate s = new Subordinate();
                     System.out.printf("What would you like to do?%n"
-                                    + "0: Quit%n"
                                     + "1: Search by first name%n"
-                                    + "2: Search by team name%n");
+                                    + "2: Search by team name%n"
+                                    + "0: Quit%n");
                     Scanner in = new Scanner(System.in);
                     int input = in.nextInt();
                     in.nextLine();
