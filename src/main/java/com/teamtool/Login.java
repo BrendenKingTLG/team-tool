@@ -29,7 +29,7 @@ public class Login {
                         }
                     }
                 }
-                startApp();
+                mainMenu();
             } catch (RuntimeException e) {
                 throw new RuntimeException();
             } catch (IOException e) {
@@ -37,7 +37,7 @@ public class Login {
             }
 }
 
-    public static void startApp() throws FileNotFoundException {
+    public static void mainMenu() throws IOException {
         if (auth) {
             if (userArray[5].equals("yes")) {
                 Manager m = new Manager();
