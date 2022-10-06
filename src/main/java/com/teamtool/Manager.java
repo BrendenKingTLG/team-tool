@@ -20,8 +20,40 @@ public class Manager {
         searchByName(findEmployee);
     }
 
+    public void inputForSearchByTeam() throws IOException {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Please enter the name of the team");
+        String teamName = in.nextLine();
+        searchByTeam(teamName);
+    }
+
     public void searchByName(String findEmployee) throws IOException {
         System.out.println(reader(findEmployee));
+    }
+
+    public void searchByTeam(String teamName) throws IOException {
+        System.out.println(reader(teamName));
+    }
+
+    public void getUserInputForNewEmployee() {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please enter first name");
+        this.addEmployeeArray[0] = input.nextLine().toLowerCase();
+        System.out.println("Please enter last name");
+        this.addEmployeeArray[1] = input.nextLine().toLowerCase();
+        System.out.println("Please enter a hire date format: YYYY-MM-DD");
+        this.addEmployeeArray[2] = input.nextLine();
+        while (!this.addEmployeeArray[2].matches("\\d{4}-\\d{2}-\\d{2}")) {
+            System.out.println("Please enter date in the correct format.  Ex: YYYY-MM-DD");
+            this.addEmployeeArray[2] = input.nextLine();
+        }
+        System.out.println("Please enter a team");
+        this.addEmployeeArray[3] = input.nextLine().toLowerCase();
+        System.out.println("Please enter a role");
+        this.addEmployeeArray[4] = input.nextLine().toLowerCase();
+        System.out.println("Is this employee a manager?");
+        this.addEmployeeArray[5] = input.nextLine().toLowerCase();
+        addEmployee(addEmployeeArray);
     }
 
     public String reader(String findEmployee) throws IOException {
@@ -51,17 +83,6 @@ public class Manager {
         return null;
     }
 
-    public void inputForSearchByTeam() throws IOException {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Please enter the name of the team");
-        String teamName = in.nextLine();
-        searchByTeam(teamName);
-    }
-
-    public void searchByTeam(String teamName) throws IOException {
-        System.out.println(reader(teamName));
-    }
-
     public void addEmployee(String[] addEmployeeArray) {
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
@@ -72,7 +93,6 @@ public class Manager {
             e.printStackTrace();
         }
     }
-
 
     public void changeEmployee() throws IOException {
         inputForSearchByName();
@@ -139,27 +159,5 @@ public class Manager {
             e.printStackTrace();
         }
     }
-
-    public void getUserInputForNewEmployee() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Please enter first name");
-        this.addEmployeeArray[0] = input.nextLine().toLowerCase();
-        System.out.println("Please enter last name");
-        this.addEmployeeArray[1] = input.nextLine().toLowerCase();
-        System.out.println("Please enter a hire date format: YYYY-MM-DD");
-        this.addEmployeeArray[2] = input.nextLine();
-        while (!this.addEmployeeArray[2].matches("\\d{4}-\\d{2}-\\d{2}")) {
-            System.out.println("Please enter date in the correct format.  Ex: YYYY-MM-DD");
-            this.addEmployeeArray[2] = input.nextLine();
-        }
-        System.out.println("Please enter a team");
-        this.addEmployeeArray[3] = input.nextLine().toLowerCase();
-        System.out.println("Please enter a role");
-        this.addEmployeeArray[4] = input.nextLine().toLowerCase();
-        System.out.println("Is this employee a manager?");
-        this.addEmployeeArray[5] = input.nextLine().toLowerCase();
-        addEmployee(addEmployeeArray);
-    }
-
 }
 
