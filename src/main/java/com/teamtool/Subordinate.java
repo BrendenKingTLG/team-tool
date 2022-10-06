@@ -1,6 +1,8 @@
 package com.teamtool;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class Subordinate extends Manager {
 
@@ -8,11 +10,11 @@ public class Subordinate extends Manager {
         super();
     }
 
-    public void searchByName() throws FileNotFoundException {
+    public void searchByName() throws IOException, URISyntaxException {
         super.inputForSearchByName();
     }
 
-    public void subordinateInputForSearchByTeam() throws FileNotFoundException {
+    public void subordinateInputForSearchByTeam() throws IOException, URISyntaxException {
         super.inputForSearchByTeam();
     }
 

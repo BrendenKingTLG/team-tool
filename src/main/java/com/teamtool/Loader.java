@@ -1,38 +1,30 @@
 package com.teamtool;
 
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-public class CSVStream {
+public class Loader {
 
-    public static void main(String[] args) throws URISyntaxException { //should a 'throws' exception go on this line after args?
-        URI uri = CSVStream.class
+    public List<String[]> loadEmployees (String fileName) throws URISyntaxException, IOException {
+        URI uri = Loader.class
                 .getClassLoader()
                 .getResource("Employee.csv")
                 .toURI();
         Path path = Path.of(uri);
 
 
-        Map<String, List<Employee>> employeeMap = Files.lines(path)
+        return Files.lines(path)
                 .skip(1)
-                .map(CSVStream::getEmployee)
-                .collect(Collectors.groupingBy((Employee::getLastName), Collectors.toList()));
-        System.out.println(employeeMap);
-
-    }
-    private static Employee getEmployee(String line) {
-        String[] fields = line.split("\\s*,\\s*");
-        if (fields.length!=5) {
-            throw new RuntimeException("Invalid CSV line - " + line);
-        }
-//        return new Employee(Integer.parseInt(fields[0]), fields[1], fields[2], fields[4]);
-        return null;
+                .map(String::trim)
+                .filter((line) -> !line.isEmpty())
+                .map((line) -> line.split("\\s*,\\s*"))
+                .collect(Collectors.toList());
     }
 }
 
