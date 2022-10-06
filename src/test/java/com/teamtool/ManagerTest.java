@@ -11,9 +11,6 @@ class ManagerTest {
     @Test
     void query() throws FileNotFoundException {
         Manager m = new Manager();
-        m.query();
-        ByteArrayInputStream in = new ByteArrayInputStream("brenden".getBytes());
-        System.setIn(in);
     }
 
     @Test
