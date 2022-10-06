@@ -98,15 +98,7 @@ public class Manager {
 
     public void changeEmployee() throws IOException {
         inputForSearchByName();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            String line;
-            StringBuilder str = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                if (!line.contains(employeeArray[0]))
-                    str.append(line);
-                str.append("\n");
-            }
+        StringBuilder str = readerForChangeAndDelete();
             Scanner in = new Scanner(System.in);
             System.out.printf("What would you like to change?%n"
                     + "0:first-name%n"
@@ -137,9 +129,6 @@ public class Manager {
             writer.write(String.valueOf(str));
             writer.close();
             System.out.println("Success! Employee changed\n");
-        } catch (IOException e) {
-            throw new IOException(e);
-        }
     }
 
     public StringBuilder readerForChangeAndDelete() throws IOException {
