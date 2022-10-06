@@ -87,7 +87,8 @@ public class Manager {
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
             writer.newLine();
-            writer.write(String.format("%s,%s,%s,%s,%s,%s", addEmployeeArray[0], addEmployeeArray[1], addEmployeeArray[2], addEmployeeArray[3], addEmployeeArray[4], addEmployeeArray[5]));
+            writer.write(String.format("%s,%s,%s,%s,%s,%s",
+                    addEmployeeArray[0], addEmployeeArray[1], addEmployeeArray[2], addEmployeeArray[3], addEmployeeArray[4], addEmployeeArray[5]));
             System.out.println("\nSuccess! New employee created.");
         } catch (Exception e) {
             e.printStackTrace();
