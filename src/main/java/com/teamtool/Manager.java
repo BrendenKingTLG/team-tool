@@ -28,11 +28,11 @@ public class Manager {
     }
 
     public void searchByName(String findEmployee) throws IOException {
-        System.out.println(reader(findEmployee));
+        System.out.println(readerForSearchMethods(findEmployee));
     }
 
     public void searchByTeam(String teamName) throws IOException {
-        System.out.println(reader(teamName));
+        System.out.println(readerForSearchMethods(teamName));
     }
 
     public void getUserInputForNewEmployee() {
@@ -56,7 +56,7 @@ public class Manager {
         addEmployee(addEmployeeArray);
     }
 
-    public String reader(String findEmployee) throws IOException {
+    public String readerForSearchMethods(String findEmployee) throws IOException {
         try {
             FileReader fr = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(fr);
