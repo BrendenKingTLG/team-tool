@@ -57,7 +57,6 @@ public class Manager {
     }
 
     public String reader(String findEmployee) throws IOException {
-        PrintStream result = null;
         try {
             FileReader fr = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(fr);
@@ -66,7 +65,7 @@ public class Manager {
                 if (line.contains(findEmployee)) {
                     String[] theEmployeeArray = line.split(",");
                     employeeArray = theEmployeeArray;
-                    result = System.out.printf("" +
+                    System.out.printf("" +
                                     "first-name:   %s%n" +
                                     "last-name:    %s%n" +
                                     "hire-date:    %s%n" +
@@ -81,8 +80,7 @@ public class Manager {
         } catch (IOException e) {
             throw new IOException("Could not find file");
         }
-        assert result != null;
-        return result.toString();
+        return "";
     }
 
     public void addEmployee(String[] addEmployeeArray) {
