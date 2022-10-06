@@ -136,7 +136,7 @@ public class Manager {
             writer.close();
             System.out.println("Success! Employee changed\n");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new IOException(e);
         }
         mainMenu();
     }

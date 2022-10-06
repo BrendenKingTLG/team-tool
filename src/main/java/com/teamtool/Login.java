@@ -1,7 +1,6 @@
 package com.teamtool;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Objects;
@@ -30,9 +29,7 @@ public class Login {
                     }
                 }
                 mainMenu();
-            } catch (RuntimeException e) {
-                throw new RuntimeException();
-            } catch (IOException e) {
+            } catch (RuntimeException | IOException e) {
                 e.printStackTrace();
             }
 }
