@@ -21,30 +21,34 @@ public class Manager {
     }
 
     public void searchByName(String findEmployee) throws IOException {
-        String result = "Employee not found";
+        System.out.println(reader(findEmployee));
+    }
+
+    public String reader(String findEmployee) throws IOException {
         try {
             FileReader fr = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(fr);
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith(findEmployee)) {
+                if (line.contains(findEmployee)) {
                     String[] theEmployeeArray = line.split(",");
-                    result = String.format("" +
+                    employeeArray = theEmployeeArray;
+                    System.out.printf("" +
                                     "first-name:   %s%n" +
                                     "last-name:    %s%n" +
                                     "hire-date:    %s%n" +
                                     "team:         %s%n" +
                                     "role:         %s%n" +
-                                    "is-manager:   %s%n",
+                                    "is-manager:   %s%n%n",
                             theEmployeeArray[0], theEmployeeArray[1], theEmployeeArray[2], theEmployeeArray[3], theEmployeeArray[4], theEmployeeArray[5]);
-                    employeeArray = theEmployeeArray;
+
                 }
             }
             reader.close();
         } catch (IOException e) {
             throw new IOException("Could not find file");
         }
-        System.out.println(result);
+        return null;
     }
 
     public void inputForSearchByTeam() throws IOException {
@@ -55,29 +59,7 @@ public class Manager {
     }
 
     public void searchByTeam(String teamName) throws IOException {
-        try {
-            FileReader fr = new FileReader(fileName);
-            BufferedReader reader = new BufferedReader(fr);
-            String line;
-            System.out.printf("The members of %s are listed below:%n", teamName);
-            while ((line = reader.readLine()) != null) {
-                if (line.contains(teamName)) {
-                    String[] teamArray = line.split(",");
-                    String output = String.format("" +
-                                    "first-name:   %s%n" +
-                                    "last-name:    %s%n" +
-                                    "hire-date:    %s%n" +
-                                    "team:         %s%n" +
-                                    "role:         %s%n" +
-                                    "is-manager:   %s%n",
-                            teamArray[0], teamArray[1], teamArray[2], teamArray[3], teamArray[4], teamArray[5]);
-                    System.out.println(output);
-                }
-            }
-            reader.close();
-        } catch (IOException e) {
-            throw new IOException("File not found");
-        }
+        System.out.println(reader(teamName));
     }
 
     public void addEmployee(String[] addEmployeeArray) {
