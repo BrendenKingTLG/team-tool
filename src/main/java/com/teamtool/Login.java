@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Login {
     static final String fileName = "Employee.csv";
     private static String[] userArray = new String[6];
-    static String[] employeeArray = new String[6];
+
     private static boolean auth = false;
 
     public static void authentication() {

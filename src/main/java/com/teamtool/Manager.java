@@ -6,6 +6,7 @@ import java.util.Scanner;import static com.teamtool.Login.*;
 
     public class Manager {
     private final String[] addEmployeeArray = new String[6];
+    private static String[] employeeArray = new String[6];
 
     public Manager() {
     }
@@ -25,7 +26,7 @@ import java.util.Scanner;import static com.teamtool.Login.*;
             String line;
             while ((line = reader.readLine()) != null) {
                 if (line.startsWith(findEmployee)) {
-                    String[] employeeArray = line.split(",");
+                    String[] theEmployeeArray = line.split(",");
                     result = String.format("" +
                             "first-name:   %s%n" +
                             "last-name:    %s%n" +
@@ -33,8 +34,8 @@ import java.util.Scanner;import static com.teamtool.Login.*;
                             "team:         %s%n" +
                             "role:         %s%n" +
                             "is-manager:   %s%n",
-                        employeeArray[0], employeeArray[1], employeeArray[2], employeeArray[3], employeeArray[4], employeeArray[5]);
-                    Login.employeeArray = employeeArray;
+                        theEmployeeArray[0], theEmployeeArray[1], theEmployeeArray[2], theEmployeeArray[3], theEmployeeArray[4], theEmployeeArray[5]);
+                    employeeArray = theEmployeeArray;
                 }
             }
             reader.close();
@@ -42,6 +43,7 @@ import java.util.Scanner;import static com.teamtool.Login.*;
             throw new FileNotFoundException("Could not find file");
         }
         System.out.println(result);
+        startApp();
     }
 
     public void inputForSearchByTeam() throws FileNotFoundException {
@@ -90,6 +92,7 @@ import java.util.Scanner;import static com.teamtool.Login.*;
         startApp();
     }
 
+
     public void changeEmployee() throws FileNotFoundException {
         inputForSearchByName();
         try {
@@ -97,7 +100,7 @@ import java.util.Scanner;import static com.teamtool.Login.*;
             String line;
             StringBuilder str = new StringBuilder();
             while ((line = reader.readLine()) != null) {
-                if (!line.startsWith(employeeArray[0]))
+                if (!line.contains(employeeArray[0]))
                     str.append(line);
                 str.append("\n");
             }
@@ -114,7 +117,14 @@ import java.util.Scanner;import static com.teamtool.Login.*;
             System.out.println("Enter desired change");
             String change = in.nextLine().toLowerCase();
             employeeArray[test] = change;
-            System.out.println(Arrays.toString(employeeArray));
+            System.out.printf("" +
+                    "first-name:   %s%n" +
+                    "last-name:    %s%n" +
+                    "hire-date:    %s%n" +
+                    "team:         %s%n" +
+                    "role:         %s%n" +
+                    "is-manager:   %s%n%n",
+                employeeArray[0], employeeArray[1], employeeArray[2], employeeArray[3], employeeArray[4], employeeArray[5]);
             PrintWriter writer = new PrintWriter(fileName);
             String sb = Arrays.toString(employeeArray);
             sb = sb.replace("[", "");
@@ -123,6 +133,7 @@ import java.util.Scanner;import static com.teamtool.Login.*;
             str.append(sb);
             writer.write(String.valueOf(str));
             writer.close();
+            System.out.println("Success! Employee changed\n");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -143,7 +154,7 @@ import java.util.Scanner;import static com.teamtool.Login.*;
             PrintWriter writer = new PrintWriter(fileName);
             writer.print(str);
             writer.close();
-            System.out.println("\nSuccess! Employee was deleted");
+            System.out.println("\nSuccess! Employee was deleted\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
