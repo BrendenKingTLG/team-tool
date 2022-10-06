@@ -78,7 +78,6 @@ public class Manager {
         } catch (IOException e) {
             throw new IOException("File not found");
         }
-        mainMenu();
     }
 
     public void addEmployee(String[] addEmployeeArray) throws IOException {
@@ -90,7 +89,6 @@ public class Manager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mainMenu();
     }
 
 
@@ -138,7 +136,6 @@ public class Manager {
         } catch (IOException e) {
             throw new IOException(e);
         }
-        mainMenu();
     }
 
     public void deleteEmployee() throws IOException {
@@ -159,7 +156,6 @@ public class Manager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        mainMenu();
     }
 
     public void getUserInputForNewEmployee() throws IOException {

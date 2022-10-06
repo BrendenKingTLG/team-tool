@@ -35,61 +35,67 @@ public class Login {
 }
 
     public static void mainMenu() throws IOException {
-        if (auth) {
-            if (userArray[5].equals("yes")) {
-                Manager m = new Manager();
-                System.out.printf("What would you like to do?%n"
-                                + "0: Search by name%n"
-                                + "1: Search by team name%n"
-                                + "2: Add a new employee%n"
-                                + "3: Delete an employee%n"
-                                + "4: Update employee information%n");
-                Scanner in = new Scanner(System.in);
-                int input = in.nextInt();
-                in.nextLine();
-                switch (input) {
-                    case 0:
-                        m.inputForSearchByName();
-                        break;
-                    case 1:
-                        m.inputForSearchByTeam();
-                        break;
-                    case 2:
-                        m.getUserInputForNewEmployee();
-                        break;
-                    case 3:
-                        m.deleteEmployee();
-                        break;
-                    case 4:
-                        m.changeEmployee();
-                        break;
-                    default:
-                        System.out.println("You did not choose a valid option.");
-                        break;
+        mainMenu:
+        while (true) {
+            if (auth) {
+                if (userArray[5].equals("yes")) {
+                    Manager m = new Manager();
+                    System.out.printf("What would you like to do?%n"
+                                    + "0: quit%n"
+                                    + "1: Search by team name%n"
+                                    + "2: Search by first name%n"
+                                    + "3: Delete an employee%n"
+                                    + "4: Update employee information%n"
+                                    + "5: Add a new employee%n");
+                    Scanner in = new Scanner(System.in);
+                    int input = in.nextInt();
+                    in.nextLine();
+                    switch (input) {
+                        case 0:
+                            break mainMenu;
+                        case 1:
+                            m.inputForSearchByTeam();
+                            break;
+                        case 2:
+                            m.inputForSearchByName();
+                            break;
+                        case 3:
+                            m.deleteEmployee();
+                            break;
+                        case 4:
+                            m.changeEmployee();
+                            break;
+                        case 5:
+                            m.getUserInputForNewEmployee();
+                            break;
+                        default:
+                            System.out.println("You did not choose a valid option.");
+                            break;
+                    }
                 }
-            }
-            if (userArray[5].equals("no")) {
-                Subordinate s = new Subordinate();
-                System.out.printf("What would you like to do?%n"
-                                + "0: Search by name%n"
-                                + "1: Search by team name%n");
-                Scanner in = new Scanner(System.in);
-                int input = in.nextInt();
-                in.nextLine();
-                switch (input){
-                    case 0:
-                        s.searchByName();
-                        break;
-                    case 1:
-                        s.subordinateInputForSearchByTeam();
-                        break;
-                    case 3:
-                        System.out.println("You did not choose a valid option.");
-                        break;
+                if (userArray[5].equals("no")) {
+                    Subordinate s = new Subordinate();
+                    System.out.printf("What would you like to do?%n"
+                                    + "0: Search by name%n"
+                                    + "1: Search by team name%n");
+                    Scanner in = new Scanner(System.in);
+                    int input = in.nextInt();
+                    in.nextLine();
+                    switch (input){
+                        case 0:
+                            s.searchByName();
+                            break;
+                        case 1:
+                            s.subordinateInputForSearchByTeam();
+                            break;
+                        case 3:
+                            System.out.println("You did not choose a valid option.");
+                            break;
+                    }
                 }
+            } else {
+                System.out.println("Not authenticated");
             }
-        } else {
-            System.out.println("Not authenticated");
         }
     }
 }
