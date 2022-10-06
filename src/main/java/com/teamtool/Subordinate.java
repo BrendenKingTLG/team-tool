@@ -1,6 +1,6 @@
 package com.teamtool;
 
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 
 public class Subordinate extends Manager {
@@ -9,7 +9,7 @@ public class Subordinate extends Manager {
         super();
     }
 
-    public void searchByName() throws FileNotFoundException {
+    public void searchByName() throws IOException {
         super.inputForSearchByName();
     }
 

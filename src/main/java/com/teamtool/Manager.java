@@ -13,14 +13,14 @@ public class Manager {
     public Manager() {
     }
 
-    public void inputForSearchByName() throws FileNotFoundException {
+    public void inputForSearchByName() throws IOException {
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
         String findEmployee = in.nextLine().toLowerCase();
         searchByName(findEmployee);
     }
 
-    public void searchByName(String findEmployee) throws FileNotFoundException {
+    public void searchByName(String findEmployee) throws IOException {
         String result = "Employee not found";
         try {
             FileReader fr = new FileReader(fileName);
@@ -42,7 +42,7 @@ public class Manager {
             }
             reader.close();
         } catch (IOException e) {
-            throw new FileNotFoundException("Could not find file");
+            throw new IOException("Could not find file");
         }
         System.out.println(result);
     }
