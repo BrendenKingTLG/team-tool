@@ -86,10 +86,10 @@ public class Login {
                         case 0:
                             break mainMenu;
                         case 1:
-                            s.inputForSearchByName();
+                            s.subordinateSearchByName();
                             break;
                         case 2:
-                            s.inputForSearchByTeam();
+                            s.subordinateInputForSearchByTeam();
                         default:
                             System.out.println("You did not choose a valid option.");
                             break;

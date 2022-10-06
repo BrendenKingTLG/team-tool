@@ -80,7 +80,7 @@ public class Manager {
         }
     }
 
-    public void addEmployee(String[] addEmployeeArray) throws IOException {
+    public void addEmployee(String[] addEmployeeArray) {
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
             writer.newLine();
@@ -158,7 +158,7 @@ public class Manager {
         }
     }
 
-    public void getUserInputForNewEmployee() throws IOException {
+    public void getUserInputForNewEmployee() {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter first name");
         this.addEmployeeArray[0] = input.nextLine().toLowerCase();

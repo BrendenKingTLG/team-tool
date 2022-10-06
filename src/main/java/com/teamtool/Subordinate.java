@@ -9,7 +9,7 @@ public class Subordinate extends Manager {
         super();
     }
 
-    public void searchByName() throws IOException {
+    public void subordinateSearchByName() throws IOException {
         super.inputForSearchByName();
     }
 
