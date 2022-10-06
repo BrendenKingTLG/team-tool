@@ -152,7 +152,7 @@ public class Manager {
         PrintWriter writer = new PrintWriter(fileName);
         writer.print(str);
         writer.close();
-        System.out.println("\nSuccess! Employee was deleted\n");
+        System.out.println("Success! Employee was deleted\n");
     }
 }
 
