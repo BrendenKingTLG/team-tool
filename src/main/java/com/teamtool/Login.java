@@ -41,7 +41,7 @@ public class Login {
                 if (userArray[5].equals("yes")) {
                     Manager m = new Manager();
                     System.out.printf("What would you like to do?%n"
-                                    + "0: quit%n"
+                                    + "0: Quit%n"
                                     + "1: Search by team name%n"
                                     + "2: Search by first name%n"
                                     + "3: Delete an employee%n"
@@ -76,19 +76,21 @@ public class Login {
                 if (userArray[5].equals("no")) {
                     Subordinate s = new Subordinate();
                     System.out.printf("What would you like to do?%n"
-                                    + "0: Search by name%n"
-                                    + "1: Search by team name%n");
+                                    + "0: Quit%n"
+                                    + "1: Search by first name%n"
+                                    + "2: Search by team name%n");
                     Scanner in = new Scanner(System.in);
                     int input = in.nextInt();
                     in.nextLine();
                     switch (input){
                         case 0:
-                            s.searchByName();
-                            break;
+                            break mainMenu;
                         case 1:
-                            s.subordinateInputForSearchByTeam();
+                            s.inputForSearchByName();
                             break;
-                        case 3:
+                        case 2:
+                            s.inputForSearchByTeam();
+                        default:
                             System.out.println("You did not choose a valid option.");
                             break;
                     }
