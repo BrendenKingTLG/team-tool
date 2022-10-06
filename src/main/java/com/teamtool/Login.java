@@ -11,6 +11,9 @@ public class Login {
     static String[] employeeArray = new String[6];
     private static boolean auth = false;
 
+    /**
+     *
+     */
     public static void authentication() {
         System.out.printf("Welcome to Team Tool%n"
                         +"Please enter your name%n");
@@ -35,6 +38,10 @@ public class Login {
             }
     }
 
+    /**
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public static void startApp() throws IOException, URISyntaxException {
         mainMenu:
         while (true) {

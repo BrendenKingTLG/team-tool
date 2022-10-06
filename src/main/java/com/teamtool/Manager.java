@@ -8,11 +8,21 @@ import java.util.Scanner;
 import static com.teamtool.Login.*;
 
 public class Manager {
+    /**
+     *
+     */
     private final String[] addEmployeeArray = new String[6];
 
+    /**
+     *
+     */
     public Manager() {
     }
 
+    /**
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void inputForSearchByName() throws IOException, URISyntaxException {
         Scanner in = new Scanner(System.in);
         System.out.println("\nEnter employee name");
@@ -20,6 +30,11 @@ public class Manager {
         searchByName(findEmployee);
     }
 
+    /**
+     * @param findEmployee
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void searchByName(String findEmployee) throws IOException, URISyntaxException {
         String result = "Employee not found";
         Loader loader = new Loader();
@@ -40,6 +55,10 @@ public class Manager {
         System.out.println(result);
     }
 
+    /**
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void inputForSearchByTeam() throws IOException, URISyntaxException {
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter the name of the team");
@@ -47,6 +66,11 @@ public class Manager {
         searchByTeam(teamName);
     }
 
+    /**
+     * @param teamName
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void searchByTeam(String teamName) throws IOException, URISyntaxException {
             System.out.printf("The members of %s are listed below:%n", teamName);
         Loader loader = new Loader();
@@ -66,6 +90,11 @@ public class Manager {
             }
     }
 
+    /**
+     * @param addEmployeeArray
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void addEmployee(String[] addEmployeeArray) throws IOException, URISyntaxException {
         try (FileWriter fw = new FileWriter("Employee.csv", true);
              BufferedWriter writer = new BufferedWriter(fw)) {
@@ -77,6 +106,10 @@ public class Manager {
         }
     }
 
+    /**
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void changeEmployee() throws IOException, URISyntaxException {
         try {
             inputForSearchByName();
@@ -115,6 +148,10 @@ public class Manager {
         }
     }
 
+    /**
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void deleteEmployee() throws IOException, URISyntaxException {
         try {
             inputForSearchByName();
@@ -135,6 +172,10 @@ public class Manager {
         }
     }
 
+    /**
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void getUserInputForNewEmployee() throws IOException, URISyntaxException {
         Scanner input = new Scanner(System.in);
         System.out.println("Please enter first name");
