@@ -10,8 +10,6 @@ public class Login {
     static final String fileName = "Employee.csv";
     private static String[] userArray = new String[6];
 
-    private static boolean auth = false;
-
     public static void authentication() {
         System.out.printf("Welcome to Team Tool%n"
                         +"Please enter your name%n");
@@ -23,7 +21,6 @@ public class Login {
                     if (line.contains(user)) {
                         userArray = line.split(",");
                         if (Objects.equals(userArray[0], user)){
-                            auth = true;
                             System.out.println("Hello " + userArray[0] + "!");
                         }
                     }
@@ -37,7 +34,6 @@ public class Login {
     public static void mainMenu() throws IOException {
         mainMenu:
         while (true) {
-            if (auth) {
                 if (userArray[5].equals("yes")) {
                     Manager m = new Manager();
                     System.out.printf("What would you like to do?%n"
@@ -95,9 +91,6 @@ public class Login {
                             break;
                     }
                 }
-            } else {
-                System.out.println("Not authenticated");
             }
         }
     }
-}

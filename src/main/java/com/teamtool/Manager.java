@@ -57,6 +57,7 @@ public class Manager {
     }
 
     public String reader(String findEmployee) throws IOException {
+        PrintStream result = null;
         try {
             FileReader fr = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(fr);
@@ -65,7 +66,7 @@ public class Manager {
                 if (line.contains(findEmployee)) {
                     String[] theEmployeeArray = line.split(",");
                     employeeArray = theEmployeeArray;
-                    System.out.printf("" +
+                    result = System.out.printf("" +
                                     "first-name:   %s%n" +
                                     "last-name:    %s%n" +
                                     "hire-date:    %s%n" +
@@ -80,7 +81,8 @@ public class Manager {
         } catch (IOException e) {
             throw new IOException("Could not find file");
         }
-        return null;
+        assert result != null;
+        return result.toString();
     }
 
     public void addEmployee(String[] addEmployeeArray) {
@@ -125,7 +127,7 @@ public class Manager {
                             "team:         %s%n" +
                             "role:         %s%n" +
                             "is-manager:   %s%n%n",
-                    employeeArray[0], employeeArray[1], employeeArray[2], employeeArray[3], employeeArray[4], employeeArray[5]);
+                            employeeArray[0], employeeArray[1], employeeArray[2], employeeArray[3], employeeArray[4], employeeArray[5]);
             PrintWriter writer = new PrintWriter(fileName);
             String sb = Arrays.toString(employeeArray);
             sb = sb.replace("[", "");
@@ -140,8 +142,7 @@ public class Manager {
         }
     }
 
-    public void deleteEmployee() throws IOException {
-        inputForSearchByName();
+    public StringBuilder readerForChangeAndDelete() throws IOException {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
@@ -151,13 +152,19 @@ public class Manager {
                     str.append(line);
                 str.append("\n");
             }
-            PrintWriter writer = new PrintWriter(fileName);
-            writer.print(str);
-            writer.close();
-            System.out.println("\nSuccess! Employee was deleted\n");
+            return str;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException(e);
         }
     }
+
+        public void deleteEmployee() throws IOException {
+        inputForSearchByName();
+        StringBuilder str = readerForChangeAndDelete();
+        PrintWriter writer = new PrintWriter(fileName);
+        writer.print(str);
+        writer.close();
+        System.out.println("\nSuccess! Employee was deleted\n");
+        }
 }
 
