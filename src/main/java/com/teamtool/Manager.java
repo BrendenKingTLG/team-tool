@@ -94,41 +94,6 @@ public class Manager {
         }
     }
 
-    public void changeEmployee() throws IOException {
-        inputForSearchByName();
-        StringBuilder str = readerForChangeAndDelete();
-            Scanner in = new Scanner(System.in);
-            System.out.printf("What would you like to change?%n"
-                    + "0:first-name%n"
-                    + "1:last-name%n"
-                    + "2:hireDate%n"
-                    + "3:team%n"
-                    + "4:role%n"
-                    + "5:managerStatus%n");
-            int test = in.nextInt();
-            in.nextLine();
-            System.out.println("Enter desired change");
-            String change = in.nextLine().toLowerCase();
-            employeeArray[test] = change;
-            System.out.printf("" +
-                            "first-name:   %s%n" +
-                            "last-name:    %s%n" +
-                            "hire-date:    %s%n" +
-                            "team:         %s%n" +
-                            "role:         %s%n" +
-                            "is-manager:   %s%n%n",
-                            employeeArray[0], employeeArray[1], employeeArray[2], employeeArray[3], employeeArray[4], employeeArray[5]);
-            PrintWriter writer = new PrintWriter(fileName);
-            String sb = Arrays.toString(employeeArray);
-            sb = sb.replace("[", "");
-            sb = sb.replace("]", "");
-            sb = sb.replaceAll("\\s+", "");
-            str.append(sb);
-            writer.write(String.valueOf(str));
-            writer.close();
-            System.out.println("Success! Employee changed\n");
-    }
-
     public StringBuilder readerForChangeAndDelete() throws IOException {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
@@ -145,13 +110,48 @@ public class Manager {
         }
     }
 
-        public void deleteEmployee() throws IOException {
+    public void changeEmployee() throws IOException {
+        inputForSearchByName();
+        StringBuilder str = readerForChangeAndDelete();
+        Scanner in = new Scanner(System.in);
+        System.out.printf("What would you like to change?%n"
+                + "0:first-name%n"
+                + "1:last-name%n"
+                + "2:hireDate%n"
+                + "3:team%n"
+                + "4:role%n"
+                + "5:managerStatus%n");
+        int test = in.nextInt();
+        in.nextLine();
+        System.out.println("Enter desired change");
+        String change = in.nextLine().toLowerCase();
+        employeeArray[test] = change;
+        System.out.printf("" +
+                        "first-name:   %s%n" +
+                        "last-name:    %s%n" +
+                        "hire-date:    %s%n" +
+                        "team:         %s%n" +
+                        "role:         %s%n" +
+                        "is-manager:   %s%n%n",
+                employeeArray[0], employeeArray[1], employeeArray[2], employeeArray[3], employeeArray[4], employeeArray[5]);
+        PrintWriter writer = new PrintWriter(fileName);
+        String sb = Arrays.toString(employeeArray);
+        sb = sb.replace("[", "");
+        sb = sb.replace("]", "");
+        sb = sb.replaceAll("\\s+", "");
+        str.append(sb);
+        writer.write(String.valueOf(str));
+        writer.close();
+        System.out.println("Success! Employee changed\n");
+    }
+
+    public void deleteEmployee() throws IOException {
         inputForSearchByName();
         StringBuilder str = readerForChangeAndDelete();
         PrintWriter writer = new PrintWriter(fileName);
         writer.print(str);
         writer.close();
         System.out.println("\nSuccess! Employee was deleted\n");
-        }
+    }
 }
 
