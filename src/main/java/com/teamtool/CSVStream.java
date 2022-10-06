@@ -1,27 +1,38 @@
 package com.teamtool;
 
 
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CSVStream {
 
-    public static void main(String[] args) { //should a 'throws' exception go on this line after args?
-        ??? filepath? = ???.of("src", "main", "resources", "Employee.csv");
+    public static void main(String[] args) throws URISyntaxException { //should a 'throws' exception go on this line after args?
+        URI uri = CSVStream.class
+                .getClassLoader()
+                .getResource("Employee.csv")
+                .toURI();
+        Path path = Path.of(uri);
 
-        Map<String, Long> employeeMap = ???.lines(path)
+
+        Map<String, List<Employee>> employeeMap = Files.lines(path)
                 .skip(1)
                 .map(CSVStream::getEmployee)
-                .collect(Collectors.groupingBy((Employee::getLastName), Collectors.counting()));
+                .collect(Collectors.groupingBy((Employee::getLastName), Collectors.toList()));
         System.out.println(employeeMap);
 
     }
     private static Employee getEmployee(String line) {
-        String[] fields = line.split(",");
-        if (fields.length!=#)
+        String[] fields = line.split("\\s*,\\s*");
+        if (fields.length!=5) {
             throw new RuntimeException("Invalid CSV line - " + line);
-        return new Employee(Integer.parseInt(fields[0]), fields[1], fields[2], fields[4]);
+        }
+//        return new Employee(Integer.parseInt(fields[0]), fields[1], fields[2], fields[4]);
+        return null;
     }
 }
 
