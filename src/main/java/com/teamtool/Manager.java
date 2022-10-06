@@ -43,7 +43,6 @@ import java.util.Scanner;import static com.teamtool.Login.*;
             throw new FileNotFoundException("Could not find file");
         }
         System.out.println(result);
-        startApp();
     }
 
     public void inputForSearchByTeam() throws FileNotFoundException {
